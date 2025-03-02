@@ -66,3 +66,7 @@ Accept: application/json
   "price": 0,
   "quantity": -15
 }
+
+### Delete product
+DELETE http://localhost:8080/api/products/A0001
+Accept: application/json
