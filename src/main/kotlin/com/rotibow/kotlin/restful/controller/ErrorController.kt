@@ -1,5 +1,6 @@
 package com.rotibow.kotlin.restful.controller
 
+import com.rotibow.kotlin.restful.error.NotFoundException
 import com.rotibow.kotlin.restful.model.WebResponse
 import jakarta.validation.ConstraintViolationException
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -14,6 +15,15 @@ class ErrorController {
             code = 400,
             status = "BAD REQUEST",
             data = constraintViolationException.message!!
+        )
+    }
+
+    @ExceptionHandler(value = [NotFoundException::class])
+    fun notFound(notFoundException: NotFoundException): WebResponse<String> {
+        return WebResponse(
+            code = 404,
+            status = "NOT FOUND",
+            data = "Not Found"
         )
     }
 
