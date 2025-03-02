@@ -33,3 +33,36 @@ Accept: application/json
 
 GET http://localhost:8080/api/products/SALAH
 Accept: application/json
+
+### Update product
+PUT http://localhost:8080/api/products/A0001
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Laptop Acer Vero 15 2022",
+  "price": 9000000,
+  "quantity": 15
+}
+
+### Update product not found
+PUT http://localhost:8080/api/products/SALAH
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Laptop Acer Vero 15 2022",
+  "price": 9000000,
+  "quantity": 15
+}
+
+### Update product with invalid body
+PUT http://localhost:8080/api/products/A0001
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "",
+  "price": 0,
+  "quantity": -15
+}
