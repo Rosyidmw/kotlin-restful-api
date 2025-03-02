@@ -1,0 +1,35 @@
+### Create product
+
+POST http://localhost:8080/api/products
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": "A0001",
+  "name": "Laptop Acer Vero",
+  "price": 9200000,
+  "quantity": 10
+}
+
+### Create product invalid
+
+POST http://localhost:8080/api/products
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": "",
+  "name": "",
+  "price": 0,
+  "quantity": -10
+}
+
+### Get product
+
+GET http://localhost:8080/api/products/A0001
+Accept: application/json
+
+### Get product not found
+
+GET http://localhost:8080/api/products/SALAH
+Accept: application/json
