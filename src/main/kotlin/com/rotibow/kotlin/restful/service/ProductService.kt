@@ -1,6 +1,7 @@
 package com.rotibow.kotlin.restful.service
 
 import com.rotibow.kotlin.restful.model.CreateProductRequest
+import com.rotibow.kotlin.restful.model.ListProductRequest
 import com.rotibow.kotlin.restful.model.ProductResponse
 import com.rotibow.kotlin.restful.model.UpdateProductRequest
 
@@ -13,5 +14,7 @@ interface ProductService {
     fun update(id: String, updateProductRequest: UpdateProductRequest) : ProductResponse
 
     fun delete(id: String)
+
+    fun list(listProductRequest: ListProductRequest): List<ProductResponse>
 
 }

@@ -3,14 +3,17 @@ package com.rotibow.kotlin.restful.service.impl
 import com.rotibow.kotlin.restful.entity.Product
 import com.rotibow.kotlin.restful.error.NotFoundException
 import com.rotibow.kotlin.restful.model.CreateProductRequest
+import com.rotibow.kotlin.restful.model.ListProductRequest
 import com.rotibow.kotlin.restful.model.ProductResponse
 import com.rotibow.kotlin.restful.model.UpdateProductRequest
 import com.rotibow.kotlin.restful.repository.ProductRepository
 import com.rotibow.kotlin.restful.service.ProductService
 import com.rotibow.kotlin.restful.validation.ValidationUtil
+import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.util.*
+import java.util.stream.Collectors
 
 @Service
 class ProductServiceImpl(
@@ -61,6 +64,13 @@ class ProductServiceImpl(
     override fun delete(id: String) {
         val product = findProductByIdOrThrowNotFound(id)
         productRepository.delete(product)
+    }
+
+    override fun list(listProductRequest: ListProductRequest): List<ProductResponse> {
+        val page = productRepository.findAll(PageRequest.of(listProductRequest.page, listProductRequest.size))
+        val products: List<Product> = page.get().collect(Collectors.toList())
+
+        return products.map { convertProductToProductResponse(it) }
     }
 
     private fun findProductByIdOrThrowNotFound(id: String) : Product {
